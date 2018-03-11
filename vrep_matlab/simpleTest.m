@@ -22,11 +22,34 @@ function simpleTest()
         % Now try to retrieve data in a blocking fashion (i.e. a service call):
         
         
-        theta=[];
+        theta=[(90/180)*pi;0;0;0;0;0];
+        
+        
+        
+       
+        
+       
+        [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
+          pause(1);
+        if (res==vrep.simx_return_ok)
+            fprintf('%d',theta(1));
+         else
+            fprintf('Remote API function call returned with error code: %d\n',res);
+         end
+%         for i=1:6
+%             
+% %             res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(i), opMode);
+%             pause(2);
+%             if (res==vrep.simx_return_ok)
+%                 fprintf('%d',theta(i));
+%             else
+%                 fprintf('Remote API function call returned with error code: %d\n',res);
+%             end
+%         end
+        pause(2);
         opMode=vrep.simx_opmode_blocking;
-        
-        
-        
+         
         [res,objs]=vrep.simxGetObjects(clientID,vrep.sim_handle_all,vrep.simx_opmode_blocking);
         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
         [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
