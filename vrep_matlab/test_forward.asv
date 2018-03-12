@@ -1,6 +1,6 @@
 %project test2 
-function forward_kin(theta)
-disp('Program started');
+function test_forward()
+    disp('Program started');
     % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
     vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
     vrep.simxFinish(-1); % just in case, close all opened connections
@@ -12,19 +12,40 @@ disp('Program started');
         % Now try to retrieve data in a blocking fashion (i.e. a service call):
         
         
-        theta=[(90/180)*pi;(90/180)*pi;0;0;0;0];
+        theta=[(90/180)*pi;0*pi;0;0;0;0];
         
        
         
-       
-        [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
+        opMode= vrep.simx_opmode_blocking;
+%         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
+        [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
+        [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
+        [res3,obj3]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint3',opMode);
+        [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
+        [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
+        [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
+        
+        
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
+        
+        
+        
           pause(1);
-        if (res==vrep.simx_return_ok)
-            fprintf('%d',theta(1));
-         else
-            fprintf('Remote API function call returned with error code: %d\n',res);
-         end
+%         if (res==vrep.simx_return_ok)
+%             fprintf('%d',theta(1));
+%          else
+%             fprintf('Remote API function call returned with error code: %d\n',res);
+%          end
 %         for i=1:6
 %             
 % %             res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(i), opMode);
