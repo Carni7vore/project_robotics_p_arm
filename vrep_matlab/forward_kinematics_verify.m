@@ -1,7 +1,7 @@
 
 
 %project test2 
-function simpleTest()
+function forward_kinematics_verify()
 disp('Program started');
     % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
     vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
