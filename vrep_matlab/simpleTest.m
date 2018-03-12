@@ -27,18 +27,21 @@ disp('Program started');
         
         
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
-        pause(1);
+        pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
-        pause(1);
+        pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
-        pause(1);
+        pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
-        pause(1);
+        pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
-        pause(1);
+        pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
-        
-        
+         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,-0.5*pi, vrep.simx_opmode_streaming);
+        pause(0.5);
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,0.5*pi, vrep.simx_opmode_streaming);
+        pause(0.1);
         
           pause(1);
 %         if (res==vrep.simx_return_ok)
@@ -106,3 +109,7 @@ disp('Program started');
 
 
 end
+
+
+
+
