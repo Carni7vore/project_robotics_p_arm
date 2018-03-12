@@ -1,3 +1,5 @@
+
+
 %project test2 
 function simpleTest()
 disp('Program started');
@@ -12,7 +14,7 @@ disp('Program started');
         % Now try to retrieve data in a blocking fashion (i.e. a service call):
         
         
-        theta=[(90/180)*pi;(30/180)*pi;(45/180)*pi;0;(30/180)*pi;(90/180)*pi];
+       theta=[(90/180)*pi;(90/180)*pi;(-90/180)*pi;0;(90/180)*pi;(0/180)*pi];
         
       %theta=[(0/180)*pi;(0/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
         
@@ -37,13 +39,32 @@ disp('Program started');
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
-         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj1,-0.5*pi, vrep.simx_opmode_streaming);
-        pause(0.5);
-        res=vrep.simxSetJointTargetPosition(clientID,obj1,0.5*pi, vrep.simx_opmode_streaming);
+         pause(5);
+ theta=[(-90/180)*pi;(90/180)*pi;(90/180)*pi;0;(90/180)*pi;(0/180)*pi];
+ 
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
         pause(0.1);
-        
-          pause(1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
+         pause(5);
+         theta=[(-90/180)*pi;(-90/180)*pi;(-90/180)*pi;0;(-90/180)*pi;(0/180)*pi];
+          res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
+        pause(4);
 %         if (res==vrep.simx_return_ok)
 %             fprintf('%d',theta(1));
 %          else
@@ -59,7 +80,7 @@ disp('Program started');
 %                 fprintf('Remote API function call returned with error code: %d\n',res);
 %             end
 %         end
-        pause(2);
+        pause(5);
         opMode=vrep.simx_opmode_blocking;
          
         [res,objs]=vrep.simxGetObjects(clientID,vrep.sim_handle_all,vrep.simx_opmode_blocking);
