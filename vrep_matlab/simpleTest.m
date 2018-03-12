@@ -1,5 +1,5 @@
 %project test2 
-function forward_kin(theta)
+function simpleTest()
 disp('Program started');
     % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
     vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
