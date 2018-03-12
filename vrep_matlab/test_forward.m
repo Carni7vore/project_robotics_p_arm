@@ -1,6 +1,6 @@
 %project test2 
-function forward_kin(theta)
-disp('Program started');
+function test_forward()
+    disp('Program started');
     % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
     vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
     vrep.simxFinish(-1); % just in case, close all opened connections
