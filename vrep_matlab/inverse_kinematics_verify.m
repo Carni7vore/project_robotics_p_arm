@@ -10,21 +10,32 @@ disp('Program started');
             
     opMode=vrep.simx_opmode_blocking;
     [res,sphere]= vrep.simxGetObjectHandle(clientID,'Sphere',opMode);
-    pause(0.5);
-    [res,x1,y1,z1]=vrep.simxGetObjectPosition(clientID,sphere,vrep.simx_opmode_streaming);
+    pause(1);
     if (res==vrep.simx_return_ok)
-            fprintf('Position %d %d %d\n',x1,y1,z1);
+%             fprintf('Position %d %d %d\n',x1,y1,z1);
+        fprintf('ok\n');
     else
             fprintf('Remote API function call returned with error code: %d\n',res);
     end
     
-    T1=[1 0 0 x1; 0 1 0 y1; 0 0 1 z1; 0 0 0 1]
-    theta=inverse_kinematics(T1);
+    [res,position]=vrep.simxGetObjectPosition(clientID,sphere,-1,vrep.simx_opmode_blocking);
+    pause(1);
+%      fprintf('position  %d\n',position);
     if (res==vrep.simx_return_ok)
-            fprintf('theta  %d\n',theta);
+            fprintf('position  %d\n',position);
     else
             fprintf('Remote API function call returned with error code: %d\n',res);
     end
+    x1=position(1);
+    y1=position(2);
+    z1=position(3);
+    
+%     x1=0.75;
+%     y1=0;
+%     z1=0.025;
+    T1=[1 0 0 x1; 0 1 0 y1; 0 0 1 z1; 0 0 0 1];
+    theta=inverse_kinematics(T1);
+    fprintf('theta  %d\n',theta);
     [res1,gripper]= vrep.simxGetObjectHandle(clientID,'BaxterGripper',opMode);
      
         

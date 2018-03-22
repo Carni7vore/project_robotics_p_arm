@@ -53,15 +53,15 @@ S=[S1,S2,S3,S4,S5,S6];
 
 
 
-theta=[0.5;0.8;0.3;0.9;0.1;0.6;0.7;0.2;0.9;0.1;0.2];
-l=0.1;
+theta=[1;0.8;0.9;0.5;0.6;0.4];
+l=0.05;
 T2= T1-base_frame;
 T1=M;
 error= 1;
 i=0;
 V1= logm(T2/(T1));
 V=[V1(3,2); V1(1,3);V1(2,1); V1(1,4); V1(2,4); V1(3,4) ];
-while error>0.06
+while error>0.01
 V1= logm(T2/(T1));
 V=[V1(3,2); V1(1,3);V1(2,1); V1(1,4); V1(2,4); V1(3,4) ];
 
@@ -82,7 +82,7 @@ J(:,5)= adjoint(t5)* S(:,5);
 J(:,6)= adjoint(t6)* S(:,6);
 
 
-tdot=pinv(J)*V;
+tdot=inv(J)*V;
 
 T1=t7 *M;
 
@@ -90,6 +90,7 @@ T1=t7 *M;
 error= norm(V);
 i=i+1;
 theta= theta+ tdot* l;
+
 end
 
 
