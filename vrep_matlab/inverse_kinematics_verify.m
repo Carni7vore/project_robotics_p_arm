@@ -33,15 +33,16 @@ disp('Program started');
 %     x1=0.75;
 %     y1=0;
 %     z1=0.025;
-    T1=[1 0 0 x1; 0 1 0 y1; 0 0 1 z1; 0 0 0 1];
-    theta=inverse_kinematics(T1);
-    fprintf('theta  %d\n',theta);
-    [res1,gripper]= vrep.simxGetObjectHandle(clientID,'BaxterGripper',opMode);
-     
+    T1=[0 1 0 x1; 0 0 1 y1; 1 0 0 z1; 0 0 0 1];
+    theta2=inverse_kinematics(T1);
+    fprintf('theta %d \n',theta2);
+    
+%     [res1,gripper]= vrep.simxGetObjectHandle(clientID,'BaxterGripper',opMode);
+    
         
        %theta 1 
-       theta=[(theta(1)/180)*pi;(theta(2)/180)*pi;(theta(3)/180)*pi;theta(4)/180*pi;(theta(5)/180)*pi;(theta(6)/180)*pi];
-        
+%     theta=[(theta(1)/180)*pi;(theta(2)/180)*pi;(theta(3)/180)*pi;(theta(4)/180)*pi;(theta(5)/180)*pi;(theta(6)/180)*pi];
+%     fprintf('theta %d \n', theta);
      %Get joints
         opMode= vrep.simx_opmode_blocking;
         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
@@ -50,19 +51,20 @@ disp('Program started');
         [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
+        theta= real(single(theta2));
         
 %         %Move joints
-        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_blocking);
         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_blocking);
         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_blocking);
         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_blocking);
         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_blocking);
         pause(0.1);
-        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
+        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_blocking);
          pause(3);
 %       
 %         
