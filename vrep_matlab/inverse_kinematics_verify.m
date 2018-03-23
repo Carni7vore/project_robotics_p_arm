@@ -9,7 +9,7 @@ disp('Program started');
         disp('Connected to remote API server');
             
     opMode=vrep.simx_opmode_blocking;
-    [res,sphere]= vrep.simxGetObjectHandle(clientID,'Sphere',opMode);
+    [res,sphere]= vrep.simxGetObjectHandle(clientID,'Test',opMode);
     pause(1);
     if (res==vrep.simx_return_ok)
 %             fprintf('Position %d %d %d\n',x1,y1,z1);
@@ -33,7 +33,7 @@ disp('Program started');
 %     x1=0.75;
 %     y1=0;
 %     z1=0.025;
-    T1=[0 1 0 x1; 0 0 1 y1; 1 0 0 z1; 0 0 0 1];
+    T1=[0 0 1 x1;0 1 0 y1; -1 0 0 z1; 0 0 0 1];
     theta2=inverse_kinematics(T1);
     fprintf('theta %d \n',theta2);
     
@@ -52,18 +52,20 @@ disp('Program started');
         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
         theta= real(single(theta2));
-        
+        target= forward_kinematics(theta);
+        target
+        fprintf('target position %d \n', target);
 %         %Move joints
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_blocking);
-        pause(0.1);
+        pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_blocking);
-        pause(0.1);
+        pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_blocking);
-        pause(0.1);
+        pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_blocking);
-        pause(0.1);
+        pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_blocking);
-        pause(0.1);
+        pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_blocking);
          pause(3);
 %       

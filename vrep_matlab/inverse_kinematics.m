@@ -81,8 +81,8 @@ J(:,4)= adjoint(t4)* S(:,4);
 J(:,5)= adjoint(t5)* S(:,5);
 J(:,6)= adjoint(t6)* S(:,6);
 
-mat1= ones(6,6);
-mat1= mat1*0.1;
+mat1= eye(6,6);
+mat1= mat1*0.01;
 % tdot=inv(J)*V;
 tdot= inv(J'*J+mat1)*J'*V;
 T1=t7 *M;
