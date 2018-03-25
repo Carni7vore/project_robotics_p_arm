@@ -20,25 +20,25 @@ disp('Program started');
     
     [res,position1]=vrep.simxGetObjectPosition(clientID,t1,-1,vrep.simx_opmode_blocking);
     [res,ori1]=vrep.simxGetObjectOrientation(clientID,t1,-1,opMode);
-    ori1=real(ori1);
+    ori1=real(double(ori1));
     rot_mat1= eul2rotm(ori1,'XYZ');
     pause(1);
     
     [res,t2]= vrep.simxGetObjectHandle(clientID,'Test2',opMode);
     [res,ori2]=vrep.simxGetObjectOrientation(clientID,t2,-1,opMode);
-    ori2=real(ori2);
+    ori2=real(double(ori2));
     rot_mat2= eul2rotm(ori2,'XYZ');
     [res,position2]=vrep.simxGetObjectPosition(clientID,t2,-1,vrep.simx_opmode_blocking);
     
      [res,t3]= vrep.simxGetObjectHandle(clientID,'Test3',opMode);
      [res,ori3]=vrep.simxGetObjectOrientation(clientID,t3,-1,opMode);
-    ori3=real(ori3);
+    ori3=real(double(ori3));
     rot_mat3= eul2rotm(ori3,'XYZ');
     [res,position3]=vrep.simxGetObjectPosition(clientID,t3,-1,vrep.simx_opmode_blocking);
     
     [res,t4]= vrep.simxGetObjectHandle(clientID,'Failed',opMode);
      [res,ori4]=vrep.simxGetObjectOrientation(clientID,t4,-1,opMode);
-    ori4=real(ori4);
+    ori4=real(double(ori4));
     rot_mat4= eul2rotm(ori4,'XYZ');
     [res,position4]=vrep.simxGetObjectPosition(clientID,t4,-1,vrep.simx_opmode_blocking);
     
