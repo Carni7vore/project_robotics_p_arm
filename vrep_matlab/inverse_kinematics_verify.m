@@ -21,25 +21,30 @@ disp('Program started');
     [res,position1]=vrep.simxGetObjectPosition(clientID,t1,-1,vrep.simx_opmode_blocking);
     [res,ori1]=vrep.simxGetObjectOrientation(clientID,t1,-1,opMode);
     ori1=real(double(ori1));
-    rot_mat1= eul2rotm(ori1,'XYZ');
+    disp(ori1);
+    rot_mat1= eul2rotm(ori1);
+    disp(rot_mat1);
     pause(1);
     
     [res,t2]= vrep.simxGetObjectHandle(clientID,'Test2',opMode);
     [res,ori2]=vrep.simxGetObjectOrientation(clientID,t2,-1,opMode);
     ori2=real(double(ori2));
-    rot_mat2= eul2rotm(ori2,'XYZ');
+    rot_mat2= eul2rotm(ori2);
+    disp(rot_mat2);
     [res,position2]=vrep.simxGetObjectPosition(clientID,t2,-1,vrep.simx_opmode_blocking);
     
      [res,t3]= vrep.simxGetObjectHandle(clientID,'Test3',opMode);
      [res,ori3]=vrep.simxGetObjectOrientation(clientID,t3,-1,opMode);
     ori3=real(double(ori3));
-    rot_mat3= eul2rotm(ori3,'XYZ');
+    rot_mat3= eul2rotm(ori3);
+    disp(rot_mat3);
     [res,position3]=vrep.simxGetObjectPosition(clientID,t3,-1,vrep.simx_opmode_blocking);
     
     [res,t4]= vrep.simxGetObjectHandle(clientID,'Failed',opMode);
      [res,ori4]=vrep.simxGetObjectOrientation(clientID,t4,-1,opMode);
     ori4=real(double(ori4));
-    rot_mat4= eul2rotm(ori4,'XYZ');
+    rot_mat4= eul2rotm(ori4);
+    disp(rot_mat4);
     [res,position4]=vrep.simxGetObjectPosition(clientID,t4,-1,vrep.simx_opmode_blocking);
     
 %      fprintf('position  %d\n',position);
@@ -99,12 +104,12 @@ disp('Program started');
         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
         
-        for i=1:3
+        for i=1:4
             
         theta= real(single(w(:,i)));
         target= forward_kinematics(theta);
-%         target
-        fprintf('target position %d \n', target);
+        target
+%         fprintf('target position %d \n', target);
 %         %Move joints
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_blocking);
         pause(1);
