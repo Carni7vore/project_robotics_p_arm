@@ -107,8 +107,9 @@ disp('Program started');
         for i=1:4
             
         theta= real(single(w(:,i)));
+        disp(theta);
         target= forward_kinematics(theta);
-        target
+        disp(target);
 %         fprintf('target position %d \n', target);
 %         %Move joints
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_blocking);
@@ -122,7 +123,7 @@ disp('Program started');
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_blocking);
         pause(1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_blocking);
-        pause(3);
+        pause(5);
         end   
         % Now send some data to V-REP in a non-blocking fashion:
         vrep.simxAddStatusbarMessage(clientID,'Hello V-REP!',vrep.simx_opmode_oneshot);
