@@ -47,6 +47,13 @@ disp('Program started');
     disp(rot_mat4);
     [res,position4]=vrep.simxGetObjectPosition(clientID,t4,-1,vrep.simx_opmode_blocking);
     
+        [res,t5]= vrep.simxGetObjectHandle(clientID,'Cuboid5',opMode);
+     [res,ori5]=vrep.simxGetObjectOrientation(clientID,t5,-1,opMode);
+    ori5=real(double(ori5));
+    rot_mat5= eul2rotm(ori5);
+    disp(rot_mat5);
+    [res,position5]=vrep.simxGetObjectPosition(clientID,t5,-1,vrep.simx_opmode_blocking);
+    
 %      fprintf('position  %d\n',position);
 %     if (res==vrep.simx_return_ok)
 %             fprintf('position  %d\n',position1);
@@ -69,6 +76,9 @@ disp('Program started');
     y4=position4(2);
     z4=position4(3);
     
+    x5=position5(1);
+    y5=position5(2);
+    z5=position5(3);
     
     T1=[0 0 1 x1;0 1 0 y1; -1 0 0 z1; 0 0 0 1];
     T1(1:3,1:3)=rot_mat1;
@@ -79,6 +89,9 @@ disp('Program started');
     
     T4=[0 0 1 x4;0 1 0 y4; -1 0 0 z4; 0 0 0 1];
     T4(1:3,1:3)=rot_mat4;
+    
+    T5=[1 0 0 x5;0 0 -1 y5; 0 1 0 z5; 0 0 0 1];
+   % T5(1:3,1:3)=rot_mat5;
 %     theta=[];
     w=zeros(6,4);
     theta1=inverse_kinematics(T1);
@@ -93,6 +106,9 @@ disp('Program started');
     theta4=inverse_kinematics(T4);
 %     fprintf('theta %d \n',theta4);
     w(:,4)= theta4;
+     theta5=inverse_kinematics(T5);
+%     fprintf('theta %d \n',theta4);
+    w(:,5)= theta5;
 %     [res1,gripper]= vrep.simxGetObjectHandle(clientID,'BaxterGripper',opMode);
      %Get joints
      
@@ -104,7 +120,7 @@ disp('Program started');
         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
         
-        for i=1:4
+        for i=1:5
             
         theta= real(single(w(:,i)));
         disp(theta);
