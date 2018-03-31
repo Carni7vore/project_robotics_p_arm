@@ -21,13 +21,15 @@ function test_forward()
      
             theta1=[20+i*3;30-i*5; 0+i*5;-100+i*5;6*i-50;90-10*i];
         theta=theta1/180*pi;
-        pos=[0.2+2i;3-6i;4+8i];
+        pos1=[0.2+2i;3-6i;4+8i];
+        pos=real(pos1);
+        opMode= vrep.simx_opmode_blocking;
        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
         res= vrep.simxSetObjectPosition(clientID,bill,-1,pos,opMode);
         
        
         
-        opMode= vrep.simx_opmode_blocking;
+        
 %         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
         [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
