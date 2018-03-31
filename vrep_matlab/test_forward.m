@@ -65,15 +65,17 @@ function test_forward()
             str1= 'Cuboid';
             str2= num2str(s-1);
             str3= strcat(str1,str2);
-            [res, cube]=vrep.simxGetObjectHandle(clientID,str3,opMode);
-            [res,pos(:,s)]= vrep.simxGetObjectPosition(clientID,cube,-1,opMode);
+%             disp(str3);
+            [res, cube(s)]=vrep.simxGetObjectHandle(clientID,str3,opMode);
+            [res,pos(:,s)]= vrep.simxGetObjectPosition(clientID,cube(s),-1,opMode);
+%             disp(pos(:,s));
             pause(0.5);
         end
         r = 0.05;
         r2= 0.034217933163767;
         theta(:,1)= [0; 0; 0; 0; 0; 0];
-        theta(:,2)= [pi/2;0; 0;0;0;0];
-        theta(:,3)= [pi/2;pi/3;0;0;0;0];
+%         theta(:,2)= [pi/2;0; 0;0;0;0];
+%         theta(:,3)= [pi/2;pi/3;0;0;0;0];
         A=[0;0;1];
         a=A(1,1);
         b=A(2,1);
@@ -166,21 +168,26 @@ function test_forward()
                     end
 
                 end
-                for s= 1:12
-                    v2=  pos(i)-p0(i);
+                
+            end
+                % disp(flag);
+                out(1,k)=flag;
+                
+        end
+        for s= 1:12
+            for i=1:8
+                    v2=  pos(s)-p0(i);
                     n2=norm(v2);
                     disp(n2);
                     if n2< (r+r2)
                         flag2=1;
                         break;
                     end
-                end
             end
-                % disp(flag);
-                out(1,k)=flag;
-                out2(1,k)=flag2;
+            out2(1,k)=flag2;
         end
-                    disp(out);
+        
+        disp(out);
                     disp(out2);
 % 
     
