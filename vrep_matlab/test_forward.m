@@ -21,7 +21,7 @@ function test_forward()
      
             theta1=[20+i*3;30-i*5; 0+i*5;-100+i*5;6*i-50;90-10*i];
         theta=theta1/180*pi;
-        pos1=[0.2+2*i;3-2*i;0];
+        pos1=[0.2-2*i;3-2*i;0];
         pos=real(pos1);
         opMode= vrep.simx_opmode_blocking;
        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
