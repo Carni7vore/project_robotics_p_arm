@@ -61,7 +61,7 @@ error= 1;
 i=0;
 V1= logm(T2/(T1));
 V=[V1(3,2); V1(1,3);V1(2,1); V1(1,4); V1(2,4); V1(3,4) ];
-while error>0.01
+while error>0.5
 V1= logm(T2/(T1));
 V=[V1(3,2); V1(1,3);V1(2,1); V1(1,4); V1(2,4); V1(3,4) ];
 
@@ -91,7 +91,7 @@ T1=t7 *M;
 error= norm(V);
 i=i+1;
 theta= theta+ tdot* l;
-
+disp(error);
 end
 
 
