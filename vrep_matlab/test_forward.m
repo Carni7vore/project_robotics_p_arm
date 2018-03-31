@@ -19,7 +19,7 @@ function test_forward()
         for i=1:20
             
      
-            theta1=[20+i*3;30-i*5; 0+i*5;-100+i*5;6*i-50;90-10*i];
+        theta1=[20+i*3;30-i*5; 0+i*5;-100+i*5;6*i-50;90-10*i];
         theta=theta1/180*pi;
         pos1=[0.2-0.2*i;3-0.2*i;0];
         pos=real(pos1);
@@ -27,7 +27,7 @@ function test_forward()
        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
         res= vrep.simxSetObjectPosition(clientID,bill,-1,pos,opMode);
         
-       
+      
         
         
 %         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
@@ -55,25 +55,7 @@ function test_forward()
         
         end
         
-%         if (res==vrep.simx_return_ok)
-%             fprintf('%d',theta(1));
-%          else
-%             fprintf('Remote API function call returned with error code: %d\n',res);
-%          end
-%         for i=1:6
-%             
-% %             res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(i), opMode);
-%             pause(2);
-%             if (res==vrep.simx_return_ok)
-%                 fprintf('%d',theta(i));
-%             else
-%                 fprintf('Remote API function call returned with error code: %d\n',res);
-%             end
-%         end
-      
-%         opMode=vrep.simx_opmode_blocking;
-%          
-%     
+% 
     
        
         % Now send some data to V-REP in a non-blocking fashion:
