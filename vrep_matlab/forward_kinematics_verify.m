@@ -40,7 +40,7 @@ disp('Program started');
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
          pause(3);
- theta=[(70/180)*pi;(90/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
+ theta=[(70/180)*pi;(75/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
  
         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
         pause(0.1);
@@ -54,7 +54,7 @@ disp('Program started');
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
          pause(3);
-         theta=[(110/180)*pi;(70/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
+  theta=[(110/180)*pi;(70/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
           res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
@@ -66,7 +66,7 @@ disp('Program started');
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
         pause(4);
         
-           theta=[1.599629287181487;2.146090925750188;-0.358177205811062;0.152286609802887;-1; -1.349130187648943];
+            theta=[(90/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
           res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
@@ -78,7 +78,7 @@ disp('Program started');
         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
         pause(4);
         
-                theta=[(60/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
+                theta=[(130/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
           res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
         pause(0.1);
         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
