@@ -69,7 +69,7 @@ function test_forward()
             [res, cube(s)]=vrep.simxGetObjectHandle(clientID,str3,opMode);
             [res,pos(:,s)]= vrep.simxGetObjectPosition(clientID,cube(s),-1,opMode);
 %             disp(pos(:,s));
-            pause(0.5);
+            pause(0.1);
         end
         r = 0.05;
         r2= 0.034217933163767;
@@ -124,7 +124,7 @@ function test_forward()
 
         z=size(theta);
         out=zeros(1,z(2));
-        out2=zeros(1,z(2));
+        out2=zeros(12,z(2));
         for k=1:z(2)
             t2= expm(scr(S(:,1))* theta(1,k));
             t3= t2* expm(scr(S(:,2))* theta(2,k));
@@ -152,6 +152,9 @@ function test_forward()
             flag=0;
             flag2=0;
             p0= [[-0.35;0;0.1115] q(1:3,:)];
+            disp(p0);
+            disp(pos);
+%             disp(q);
             for i=1:8
 %                 if (flag==1)
 %                     break;
@@ -174,21 +177,23 @@ function test_forward()
                 out(1,k)=flag;
                 
         end
-        for s= 1:12
-            for i=1:8
+        for s=3
+            for i=3
                     v2=  pos(s)-p0(i);
+                    
+                    
                     n2=norm(v2);
                     disp(n2);
-                    if n2< (r+r2)
-                        flag2=1;
-                        break;
-                    end
+%                     if n2< (r+r2)
+%                         flag2=1;
+%                         break;
+%                     end
             end
-            out2(1,k)=flag2;
+            out2(s,i)=flag2;
         end
         
-        disp(out);
-                    disp(out2);
+%         disp(out);
+%         disp(out2);
 % 
     
        
