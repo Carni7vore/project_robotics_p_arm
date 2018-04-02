@@ -247,7 +247,7 @@
         theta4=165/180*pi;
         theta5=115/180*pi;
         theta6=160/180*pi;
-        if (out3(i)==1)
+        if (out3(i,1)==1)
             disp('Collision');
         end
        
