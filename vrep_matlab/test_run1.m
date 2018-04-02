@@ -1,5 +1,5 @@
 %project test2 
-function test_forward()
+% function test_forward()
     disp('Program started');
     % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
     vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
@@ -17,44 +17,40 @@ function test_forward()
      %theta5=115;
      %theta6=160;
         for i=1:10
-% %         theta_pre=[2.079189734286514; 1.739129102350332;0.013199939361589;4.271977113818379;-2.633905735447700;2.618685867486841];
-% %         theta_box1= theta_pre*180/pi;
-%         %No collision
-%         j=i-1;
-%         theta1=[20;30;40;60;-20;90]+[j*3;j*5; j*5;j*5;j*i;-10*j];
-%         theta=theta1/180*pi;
-%         pos1=[0.2-0.2*i;3-0.2*i;0];
-%         pos=real(pos1);
-%         opMode= vrep.simx_opmode_blocking;
-%        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
-%         res= vrep.simxSetObjectPosition(clientID,bill,-1,pos,opMode);
+%         theta_pre=[2.079189734286514; 1.739129102350332;0.013199939361589;4.271977113818379;-2.633905735447700;2.618685867486841];
+%         theta_box1= theta_pre*180/pi;
+        %No collision
+        j=i-1;
+        theta1=[20;30;40;60;-20;90]+[j*3;j*5; j*5;j*5;j*i;-10*j];
+        theta=theta1/180*pi;
+        pos1=[0.2-0.2*i;3-0.2*i;0];
+        pos=real(pos1);
+        opMode= vrep.simx_opmode_blocking;
+       [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
+        res= vrep.simxSetObjectPosition(clientID,bill,-1,pos,opMode);
+   
+        [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
+        [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
+        [res3,obj3]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint3',opMode);
+        [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
+        [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
+        [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
+        
 %         
-%       
-%         
-%         
-% %         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',vrep.simx_opmode_blocking);
-%         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
-%         [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
-%         [res3,obj3]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint3',opMode);
-%         [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
-%         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
-%         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
-%         
-% %         
-%         res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
-% %         pause(1);
-%         res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
-% %         pause(1);
-%         res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
-% %         pause(1);
-%         res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
-% %         pause(1);
-%         res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
-% %         pause(1);
-%         res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
-%         disp(theta1);
-%         pause(2);
-%         
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1), vrep.simx_opmode_streaming);
+%         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2), vrep.simx_opmode_streaming);
+%         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3), vrep.simx_opmode_streaming);
+%         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4), vrep.simx_opmode_streaming);
+%         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5), vrep.simx_opmode_streaming);
+%         pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_streaming);
+       
+        pause(0.5);
+        
         end
         
         
@@ -69,21 +65,27 @@ function test_forward()
             [res, cube(s)]=vrep.simxGetObjectHandle(clientID,str3,opMode);
             [res,pos(:,s)]= vrep.simxGetObjectPosition(clientID,cube(s),-1,opMode);
 %             disp(pos(:,s));
-            pause(0.1);
+           
         end
         r = 0.05;
         r2= 0.206155;
 %         theta(:,1)= [0; 0; 0; 0; 0; 0];
 %         theta(:,2)= [pi/2;0; 0;0;0;0];
-        theta=zeros(6,12);
+%         theta=zeros(6,12);
         theta(:,1)= [pi/2;pi/3;0;0;0;0];
         
         theta(:,2)=[(70/180)*pi;(75/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
         theta(:,3)=[(110/180)*pi;(70/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
         theta(:,4)=[(90/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
-        theta(:,5)=[(130/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
-%
-        pause(1);
+        theta(:,5)=[(110/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
+%         
+        theta(:,6)= [-pi/2;pi/3;0;0;0;0];
+%         
+        theta(:,7)=[-(70/180)*pi;(75/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
+        theta(:,8)=[-(110/180)*pi;(70/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
+        theta(:,9)=[-(90/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
+        theta(:,10)=[-(110/180)*pi;2.146090925750188;-0.358177205811062;0.152286609802887;-0.5; -1.349130187648943];
+
         A=[0;0;1];
         a=A(1,1);
         b=A(2,1);
@@ -134,6 +136,7 @@ function test_forward()
         disp(z);
         out=zeros(1,z(2));
         out2=zeros(z(2),12);
+        out3=zeros(z(2),1);
         for k=1:z(2)
             t2= expm(scr(S(:,1))* theta(1,k));
             t3= t2* expm(scr(S(:,2))* theta(2,k));
@@ -184,28 +187,63 @@ function test_forward()
             end
                 % disp(flag);
                 out(1,k)=flag;
-                
-        end
-        for s=1:12
-            for i=1:8
-                    v2=  pos(:,s)-p0(:,i);
-            
-                    n2=norm(v2);
-                    
-                    if n2< (r+r2)
-                        flag2=1;
-                        disp(n2);
-%                         break;
-                    else
-                        flag2=0;
-                    end
+            for s=1:12
+            if(flag2==1)
+                out3(k)=1;
+                flag2=0;
+                break;
             end
-            out2(k,s)=flag2;
+                for i=1:8
+                        v2=  pos(:,s)-p0(:,i);
+                        n2=norm(v2);
+                        if n2< (r+r2)
+                            flag2=1;
+                            disp(n2);
+                            break;
+                        else
+                            flag2=0;
+                        end
+                end
+                out2(k,s)=flag2;
+            end
+        
         end
        
+       
 %         disp(out);
-        disp(out2);
+%          disp(out2);
+         disp(out3);
 % 
+        for i=1:10
+      
+        pos1=[0.2-0.2*i;3-0.2*i;0];
+        pos=real(pos1);
+        opMode= vrep.simx_opmode_blocking;
+%        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill_goalDummy',opMode);
+%         res= vrep.simxSetObjectPosition(clientID,bill,-1,pos,opMode);
+%         [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
+%         [res2,obj2]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint2',opMode);
+%         [res3,obj3]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint3',opMode);
+%         [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
+%         [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
+%         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
+        
+%         
+        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta(1,i), vrep.simx_opmode_streaming);  
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta(2,i), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta(3,i), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta(4,i), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta(5,i), vrep.simx_opmode_streaming);
+        pause(0.1);
+        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6,i), vrep.simx_opmode_streaming);
+        
+       pause(1.5);
+        
+        end
     
        
         % Now send some data to V-REP in a non-blocking fashion:
@@ -225,4 +263,4 @@ function test_forward()
 
 
 
-end
+% end
