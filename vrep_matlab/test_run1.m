@@ -71,7 +71,7 @@
         r2= 0.206155;
 %         theta(:,1)= [0; 0; 0; 0; 0; 0];
 %         theta(:,2)= [pi/2;0; 0;0;0;0];
-%         theta=zeros(6,12);
+        theta=zeros(6,35);
         theta(:,1)= [pi/2;pi/3;0;0;0;0];
         
         theta(:,2)=[(70/180)*pi;(75/180)*pi;(0/180)*pi;0;(0/180)*pi;(0/180)*pi];
@@ -131,10 +131,18 @@
         S=[S1,S2,S3,S4,S5,S6];
         
         scr= @(w)[0,-w(3),w(2),w(4);w(3),0,-w(1),w(5);-w(2),w(1),0,w(6);0,0,0,0];
-
+        theta_new=zeros(6,20);
+        for i=1:25
+           
+            j=i-1;
+            temp=[10;30;-40;0;-20;0]+[j*10;-j*6; j*10;-j*10;j*6;-10*j]* (-1).^j;
+            theta_new(:,i)=temp/180*pi;
+        end
+        
+       theta(:,11:35)=theta_new(:,1:25);
         z=size(theta);
 %         disp(z);
-        out=zeros(1,z(2));
+       out=zeros(1,z(2));
         out2=zeros(z(2),12);
         out3=zeros(z(2),1);
         for k=1:z(2)
@@ -219,15 +227,8 @@
      %theta4=165;
      %theta5=115;
      %theta6=160;
-      theta_new=zeros(6,20);
-        for i=1:25
-           
-            j=i-1;
-            temp=[10;30;-40;0;-20;0]+[j*10;-j*6; j*10;-j*10;j*6;-10*j]* (-1).^j;
-            theta_new(:,i)=temp/180*pi;
-        end
+      
         
-       theta(:,11:35)=theta_new(:,1:25);
         for i=1:35
       
         pos1=[0.2-0.2*i;3-0.2*i;0];
