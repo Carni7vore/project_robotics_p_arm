@@ -189,7 +189,7 @@
                 out(1,k)=flag;
             for s=1:12
             if(flag2==1)
-                out3(k)=1;
+                out3(k,1)=1;
                 flag2=0;
                 break;
             end
