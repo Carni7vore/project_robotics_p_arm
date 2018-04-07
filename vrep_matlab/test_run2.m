@@ -8,8 +8,8 @@ clientID=vrep.simxStart('127.0.0.1',19999,true,true,5000,5);
 if (clientID>-1)
 disp('Connected to remote API server');
 opMode= vrep.simx_opmode_blocking;
-
-for s=1:12
+pos=zeros(3,3);
+for s=1:3
     str1= 'Sphere';
     str2= num2str(s-1);
     str3= strcat(str1,str2);
@@ -24,17 +24,20 @@ end
 [res,RF1_ori]= vrep.simxGetObjectOrientation(clientID,RF1,-1,opMode);
 r = 0.05;
 r2= 0.2;
-
+r_obstacle=ones(3,1)*r2;
 ori1=real(double(RF1_ori));
 
 rot_mat1= eul2rotm(ori1);
 T1= [rot_mat1(1:3,1:3),RF1_pos';[0 0 0 1]];
 disp(T1);
-
-theta0=inverse_kinematics(T1);
+% M=[1 0 0 -0.35;0 1 0 -0.00013;0 0 1 1.2159;0 0 0 1];
+[theta0,S]=inverse_kinematics(T1);
 disp(theta0);
-theta=real(theta0);
+theta_1=real(theta0);
+theta=path_planning(S,pos,r_obstacle,[0;0;0;0;0;0],theta_1);
 size1=size(theta);
+
+
 for i=1:size1(2)
 opMode= vrep.simx_opmode_blocking;
 [res1,obj1]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint1',opMode);
