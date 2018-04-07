@@ -73,7 +73,7 @@ disp('Program started');
         [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
         [res,position1]=vrep.simxGetObjectPosition(clientID,obj6,-1,opMode)
         
-        [res, bill]=vrep.simxGetObjectHandle(clientID,'Bill',opMode);
+        [res, bill]=vrep.simxGetObjectHandle(clientID,'Helicopter_frontCamera',opMode);
         [res,position2]=vrep.simxGetObjectPosition(clientID,bill,-1,opMode)
      
       
