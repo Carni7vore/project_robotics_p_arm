@@ -36,7 +36,7 @@ r_robot=0.05;
 while count<n
    
     disp(count);
-    theta1=  pi*(rand(size_theta,1)*2-ones(size_theta,1));
+    theta1=  2*pi/3*(rand(size_theta,1)*2-ones(size_theta,1));
     flag1=0;
     flag2=0;
     %Forward
@@ -133,4 +133,4 @@ end
         ret(:,i+sz1(2)+1)= T_b{t2}.theta;
     end
     
-
+    disp(ret);

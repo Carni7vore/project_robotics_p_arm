@@ -17,7 +17,7 @@ size_theta=temp1(1);
 
 size_p= size(theta_start);
 path_c=zeros(size_p(2),1);
-num_run=10;
+num_run=50;
 for path=1:size_p(2)
     theta_a= theta_start(:,path);
     theta_b= theta_goal(:,path);
