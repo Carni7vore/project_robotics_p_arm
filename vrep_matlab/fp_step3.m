@@ -22,7 +22,7 @@ if (clientID>-1)
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
      for i=1:10
     x1=-0.70;
-    y1=-0.3;
+    y1=0.1;
     z1=z1-0.015;
     T1=[0 0 -1 x1;0 1 0 y1; 1 0 0 z1; 0 0 0 1];
  
@@ -58,8 +58,6 @@ else
     disp('Failed connecting to remote API server');
 end
 vrep.delete(); % call the destructor!
- THETA{1}=theta1_1;
+ THETA{3}=theta1_1;
 
 disp('Program ended');
-
-
