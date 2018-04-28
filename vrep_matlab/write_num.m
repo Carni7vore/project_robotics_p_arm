@@ -1,6 +1,6 @@
 %write num
 disp('Program started');
-load('3.mat');
+load('8.mat');
 % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
 vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
 vrep.simxFinish(-1); % just in case, close all opened connections
@@ -24,7 +24,7 @@ if (clientID>-1)
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
     pause(0.5);
     for k=1:4
-        theta0= THETA3{k};
+        theta0= THETA{k};
         temp=size(theta0);
         length= temp(2);
     for i=1:length
