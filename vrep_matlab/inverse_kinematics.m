@@ -1,4 +1,4 @@
-function [theta,S]= inverse_kinematics(T)
+function [theta,S]= inverse_kinematics(T,t)
 
 scr= @(s) [0 -s(3) s(2) s(4); s(3) 0 -s(1) s(5); -s(2) s(1) 0 s(6); 0 0 0 0];
 % base_frame=[0 0 0 -0.35; 0 0 0 0; 0 0 0 0.24; 0 0 0 0];
@@ -101,7 +101,7 @@ S=[S1,S2,S3,S4,S5,S6];
 theta=[1;0.8;0.9;0.5;0.6;0.4];
 l=0.05;
 T2= T;
-T1=M;
+T1=t;
 error= 1;
 i=0;
 % V1= logm(T2/(T1));
