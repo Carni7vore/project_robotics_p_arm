@@ -8,7 +8,7 @@ vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
 vrep.simxFinish(-1); % just in case, close all opened connections
 clientID=vrep.simxStart('127.0.0.1',19999,true,true,5000,5);
 x1=-0.7;
-y1=-0.335+0.2;
+y1=-0.335+0.6;
 z1=0.85;
 
 
@@ -109,7 +109,7 @@ else
     disp('Failed connecting to remote API server');
 end
 vrep.delete(); % call the destructor!
-THETA7{2}=theta0;
+THETA7{4}=theta0;
 
 disp('Program ended');
 
