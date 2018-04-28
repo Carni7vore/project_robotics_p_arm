@@ -1,5 +1,9 @@
 %final project step 1
 
+<<<<<<< HEAD
+=======
+z1=0.8;
+>>>>>>> 9b9961784eccd9e71ef6d5a6e816f184fa6e400e
 disp('Program started');
 
 % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
@@ -19,6 +23,7 @@ if (clientID>-1)
     [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
     [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
+<<<<<<< HEAD
   
       %0
     M=[1 0 0 -0.35;0 1 0 -0.00013;0 0 1 1.2552;0 0 0 1];
@@ -26,6 +31,12 @@ if (clientID>-1)
     x1=-0.60;
     y1=-0.335;
     z1=0.85;
+=======
+     for i=1:10
+    x1=-0.70;
+    y1=-0.3;
+    z1=z1-0.015;
+>>>>>>> 9b9961784eccd9e71ef6d5a6e816f184fa6e400e
     T1=[0 0 -1 x1;0 1 0 y1; 1 0 0 z1; 0 0 0 1];
  
     theta1=inverse_kinematics(T1,M);
@@ -46,6 +57,7 @@ if (clientID>-1)
 
     res=vrep.simxSetJointTargetPosition(clientID,obj6,theta(6), vrep.simx_opmode_blocking);
     pause(0.5);
+<<<<<<< HEAD
     t=T1;
     
     %1
@@ -157,6 +169,10 @@ if (clientID>-1)
 
 
      
+=======
+     end
+    
+>>>>>>> 9b9961784eccd9e71ef6d5a6e816f184fa6e400e
     vrep.simxAddStatusbarMessage(clientID,'Hello V-REP!',vrep.simx_opmode_oneshot);
 
     % Before closing the connection to V-REP, make sure that the last command sent out had time to arrive. You can guarantee this with (for example):
@@ -169,7 +185,11 @@ else
     disp('Failed connecting to remote API server');
 end
 vrep.delete(); % call the destructor!
+<<<<<<< HEAD
  THETA7{1}=theta1_1;
+=======
+ THETA{1}=theta1_1;
+>>>>>>> 9b9961784eccd9e71ef6d5a6e816f184fa6e400e
 
 disp('Program ended');
 
