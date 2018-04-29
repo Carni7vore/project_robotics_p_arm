@@ -1,3 +1,5 @@
+Judge=input('What can i do for you?','s');
+
 %write num
 disp('Program started');
 load('thetas.mat')
@@ -12,7 +14,18 @@ z1=0.85;
 % temp=size(theta0);
 % length= temp(2);
 
+Judge=input('What can i do for you?','s');
+work1=norm(findstr(Judge, 'the'));
 
+
+% A=isstrprop(Judge,'digit');
+% B=str(A);
+% C=str2num(B)
+
+if work1==0
+    disp('Program ended');
+    break
+end
 
 if (clientID>-1)
     disp('Connected to remote API server');
