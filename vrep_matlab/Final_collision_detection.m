@@ -26,9 +26,9 @@ function path_ret= Final_collision_detection(S,p_robot,r_robot,theta_start,theta
    theta_b=theta_goal;
 
 
-for W=1:2000
+for W=1:1500
     
-    theta=(1-W/2000)*theta_a+(W/2000)*theta_b;
+    theta=(1-W/1500)*theta_a+(W/1500)*theta_b;
     p=zeros(4,8);
     n=1;
 p(:,1)=[0;0;0;1];
@@ -54,7 +54,7 @@ for i=6:7
       break
   end
 end
-    if norm(p(1,3)+0.7)>0.08
+    if norm(p(1,3)+0.7)>0.09
       a=0;
   else 
       a=1;

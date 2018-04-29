@@ -42,7 +42,7 @@ r_robot=0.05;
 while count<n
    
     disp(count);
-    theta1=  1*pi/2*(rand(size_theta,1)*2-ones(size_theta,1));
+    theta1=  2*pi/3*(rand(size_theta,1)*2-ones(size_theta,1));
     flag1=0;
     flag2=0;
     %Forward
