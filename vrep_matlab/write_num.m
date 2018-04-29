@@ -12,6 +12,8 @@ z1=0.85;
 % temp=size(theta0);
 % length= temp(2);
 
+
+
 if (clientID>-1)
     disp('Connected to remote API server');
 
@@ -22,20 +24,29 @@ if (clientID>-1)
     [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
     [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
-    pause(0.5);
-    for k=1:4
-        theta0= THETA3{k};
-        temp=size(theta0);
-        length= temp(2);
-    for i=1:length
-        res=vrep.simxSetJointTargetPosition(clientID,obj1,theta0(1,i), vrep.simx_opmode_blocking);   
-        res=vrep.simxSetJointTargetPosition(clientID,obj2,theta0(2,i), vrep.simx_opmode_blocking);   
-        res=vrep.simxSetJointTargetPosition(clientID,obj3,theta0(3,i), vrep.simx_opmode_blocking);  
-        res=vrep.simxSetJointTargetPosition(clientID,obj4,theta0(4,i), vrep.simx_opmode_blocking);
-        res=vrep.simxSetJointTargetPosition(clientID,obj5,theta0(5,i), vrep.simx_opmode_blocking);
-        res=vrep.simxSetJointTargetPosition(clientID,obj6,theta0(6,i), vrep.simx_opmode_blocking);
-        pause(0.2);
-    end
+%     pause(0.5);
+    t=zeros(1,1,1);
+    for k=9
+        size_t= size(thetas{k}.p1);
+        t=zeros(size_t(1),size_t(2),4);
+        t(1:6,:,1)= thetas{k}.p1;
+        t(1:6,:,2)= thetas{k}.p2;
+        t(1:6,:,3)= thetas{k}.p3;
+        t(1:6,:,4)= thetas{k}.p4;
+        for j=1:4    
+            theta0= t(:,:,j);
+            temp=size(theta0);
+            length= temp(2);
+            for i=1:length
+                res=vrep.simxSetJointTargetPosition(clientID,obj1,theta0(1,i), vrep.simx_opmode_blocking);   
+                res=vrep.simxSetJointTargetPosition(clientID,obj2,theta0(2,i), vrep.simx_opmode_blocking);   
+                res=vrep.simxSetJointTargetPosition(clientID,obj3,theta0(3,i), vrep.simx_opmode_blocking);  
+                res=vrep.simxSetJointTargetPosition(clientID,obj4,theta0(4,i), vrep.simx_opmode_blocking);
+                res=vrep.simxSetJointTargetPosition(clientID,obj5,theta0(5,i), vrep.simx_opmode_blocking);
+                res=vrep.simxSetJointTargetPosition(clientID,obj6,theta0(6,i), vrep.simx_opmode_blocking);
+                pause(0.2);
+            end
+        end
     end
     vrep.simxAddStatusbarMessage(clientID,'Hello V-REP!',vrep.simx_opmode_oneshot);
 
@@ -52,3 +63,8 @@ vrep.delete(); % call the destructor!
 
 
 disp('Program ended');
+% a.p1=THETA7{1};
+% a.p2=THETA7{2};
+% a.p3=THETA7{3};
+% a.p4=THETA7{4};
+% thetas{7}=a;
