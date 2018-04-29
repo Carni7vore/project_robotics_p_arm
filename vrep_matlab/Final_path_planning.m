@@ -114,8 +114,7 @@ while count<n
             p2=b.parent;
             j=j+1;
         end
-        disp(forward_list);
-        disp(backward_list);
+       
         break;
     end
         
@@ -139,4 +138,4 @@ end
         ret(:,i+sz1(2)+1)= T_b{t2}.theta;
     end
     
-    disp(ret);
+   
