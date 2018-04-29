@@ -28,7 +28,7 @@ if (clientID>-1)
     t=zeros(1,1,1);
     initial=zeros(6,1);
     
-    for k=8
+    for k=10
         
         size_t= size(thetas{k}.p1);
         t=zeros(size_t(1),size_t(2),4);
