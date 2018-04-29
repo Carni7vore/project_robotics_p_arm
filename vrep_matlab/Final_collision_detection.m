@@ -9,124 +9,70 @@
 % theta_goal = [-2.37 -0.46 -0.22 -1.70 -1.63 -1.71 0.65 -1.02 -1.68; -2.54 1.91 -0.98 -2.69 -1.90 -2.38 1.37 -1.66 -2.79; 2.04 -2.46 -1.52 2.64 1.78 -1.42 -1.27 -3.08 -2.53; 0.13 -0.29 -0.75 0.58 3.13 -2.70 -0.80 1.08 -0.09];
 % 
 
-function path_ret= collision_detection(S,p_robot,r_robot,p_obstacle,r_obstacle,theta_start,theta_goal)
+function path_ret= Final_collision_detection(S,p_robot,r_robot,theta_start,theta_goal)
 
-scr= @(w)[0,-w(3),w(2),w(4);w(3),0,-w(1),w(5);-w(2),w(1),0,w(6);0,0,0,0];
-temp1= size(theta_start);
-size_theta=temp1(1);
+%S = [0.00 0.00 -1.00 0.00 0.00; 0.00 0.00 0.00 0.00 0.00; 1.00 0.00 0.00 0.00 0.00; 0.00 0.00 0.00 0.00 0.00; 2.00 0.00 0.00 -1.00 0.00; 0.00 1.00 2.00 0.00 1.00];
+%M = [0.00 0.00 -1.00 -8.00; 0.00 1.00 0.00 0.00; 1.00 0.00 0.00 0.00; 0.00 0.00 0.00 1.00];
+%p_robot = [0.00 -2.00 -4.00 -6.00 -6.00 -8.00 -8.00; 0.00 0.00 0.00 2.00 0.00 -2.00 0.00; 0.00 0.00 0.00 0.00 0.00 0.00 0.00];
+%r_robot = 0.05;
+% p_obstacle = [-2.71 -4.69 -0.77 -1.66 3.24; 4.86 2.58 3.45 4.92 4.32; 3.37 -4.87 4.92 1.28 2.98];
+% r_obstacle = [3.73 3.09 4.31 2.30 4.01];
 
-size_p= size(theta_start);
-path_c=zeros(size_p(2),1);
-num_run=50;
-for path=1:size_p(2)
-    theta_a= theta_start(:,path);
-    theta_b= theta_goal(:,path);
-theta=zeros(size_theta,num_run);
-for s= 1:num_run
-    theta(:,s)= (1-s/num_run)* theta_a+ s/num_run* theta_b;
+
+
+
+
+   theta_a=theta_start;
+   theta_b=theta_goal;
+
+
+for W=1:50
+    
+    theta=(1-W/50)*theta_a+(W/50)*theta_b;
+    p=zeros(4,8);
+    n=1;
+p(:,1)=[0;0;0;1];
+p(:,2)=[p_robot(:,2);1];
+t=1;
+
+
+for i=3:8
+    p(:,i)=t*expm(skew4(S(:,i-2))*theta(i-2,n))*[p_robot(:,i);1];
+    t=t*expm(skew4(S(:,i-2))*theta(i-2,n));
+    
 end
 
-z=size(theta);
-out=zeros(1,z(2));
-out2=zeros(1,z(2));
-r=r_robot;
-% for k=1:z(2)
-% t2= expm(scr(S(:,1))* theta(1,k));
-% t3= t2* expm(scr(S(:,2))* theta(2,k));
-% t4= t3* expm(scr(S(:,3))* theta(3,k));
-% t5= t4* expm(scr(S(:,4))* theta(4,k));
-% t6= t5* expm(scr(S(:,5))* theta(5,k));
-% % t7= t6* expm(scr(S(:,6))* theta(6,k));
-
-for k=1:z(2)
-    t(:,:,1)= expm(scr(S(:,1))* theta(1,k));
-    for j=2:size_theta
-        t(:,:,j)= t(:,:,j-1)*expm(scr(S(:,j))* theta(j,k));
-    end
-
-
-p= [p_robot(1:3,:) ; ones(1,size_theta+2)];
-
-q=zeros(4,z(1)+2);
-q(:,1)= p(:,1) ;
-q(:,2)= p(:,2);
-for j=1:size_theta
-    temp2=t(:,:,j);
-    q(:,j+2)= temp2*p(:,j+2);
+p=p(1:3,:);
+FF=0;
+for i=6:7
+  D1=norm(p(1,i)+0.7);
+  if D1>0.05
+      a=0;
+  else
+      a=1;
+      FF=FF+a;   
+      break
+  end
 end
-% q(:,1)= p(:,1) ;
-% q(:,2)= p(:,2);
-% temp2=t(:,:,1);
-% q(:,3)= t2* p(:,3);
-% q(:,4)= t3* p(:,4);
-% q(:,5)= t4* p(:,5);
-% q(:,6)= t5* p(:,6);
-% q(:,7)= t6* p(:,7);
-% q(:,8)= t7* p(:,7);
-flag=0;
-p0= q(1:3,:);
-for i=1:(z(1)+2)
-    if (flag==1)
-        break;
+    if norm(p(1,3)+0.7)>0.03
+      a=0;
+  else 
+      a=1;
+      
+   FF=FF+a; 
+   break
     end
-    for j=(i+1):(z(1)+2)
-        
-        v1= p0(:,j)-p0(:,i);
-        n=norm(v1);
-%         disp(n);
-        if n< (2*r)
-            flag=1;
-            out(1,k)=1;
-            break;
-       
-        end
-        
-    end
+
+if FF>0
+    break
 end
 
 
-so= size(r_obstacle);
-size_o=so(2);
-flag2=0;
-for m=1:size_o
-    if (flag2==1)
-        
-        break;
-    end
-    for i= 1:(z(1)+2)
-        v1= p_obstacle(:,m)-p0(:,i);
-        n=norm(v1);
-%         disp(n);
-%         disp(r+ r_obstacle(m));
-        if n< (r+ r_obstacle(m))
-            flag2=1;
-            out2(1,k)=flag2;
-            break;
-       
-        end
-    end
 end
 
-% disp(flag);
-
-end
-for s=1:num_run
-    if out(s)==1
-        path_c(path)=s/num_run;
-        break;
-    end
-    if out2(s)==1
-        path_c(path)=s/num_run;
-        break;
-    end
-end
-% disp(out);
-% disp(out2);
-end
-p_sum= sum(path_c);
-if p_sum==0
-    path_ret=0;
-else
+if FF>0
     path_ret=1;
-end
+else
+    path_ret=0;
+
 end

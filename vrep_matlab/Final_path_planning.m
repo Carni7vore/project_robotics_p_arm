@@ -1,7 +1,7 @@
 %path_planning
 
 %hw5_3
-function ret=path_planning(S,p_obstacle,r_obstacle,theta_start,theta_goal) 
+function ret=Final_path_planning(S,theta_start,theta_goal) 
 % S = [0.00 0.00 0.00 0.00 0.00; -1.00 0.00 0.00 0.00 0.00; 0.00 0.00 -1.00 -1.00 0.00; 0.00 0.00 2.00 4.00 0.00; 0.00 0.00 -2.00 -2.00 0.00; 4.00 -1.00 0.00 0.00 -1.00];
 % M = [0.00 0.00 -1.00 0.00; 0.00 -1.00 0.00 -6.00; -1.00 0.00 0.00 0.00; 0.00 0.00 0.00 1.00];
 % p_robot = [0.00 -4.00 -4.00 -2.00 -2.00 0.00 0.00; 0.00 0.00 -2.00 -2.00 -4.00 -4.00 -6.00; 0.00 0.00 0.00 0.00 0.00 0.00 0.00];
@@ -30,7 +30,7 @@ p(:,3)=[-0.35;0;0.3625];
 p(:,4)=[-0.35;0;0.6525];
 p(:,5)=[-0.35;0;0.8172];
 p(:,6)=[-0.35;0;0.9625];
-p(:,7)=[-0.35;0;1.3667];
+p(:,7)=[-0.35;0;1.2552];
 p(:,8)=[-0.35;-0.00013;1.2552];
 r_robot=0.05;
 while count<n
@@ -55,7 +55,7 @@ while count<n
     end
     theta_a= T_f{fp}.theta;
     theta_b= theta1;
-    path_ret= collision_detection(S,p,r_robot,p_obstacle,r_obstacle,theta_a,theta_b);
+    path_ret= Final_collision_detection(S,p,r_robot,theta_a,theta_b);
     if path_ret==0
         a.theta= theta1;
         a.parent=fp;
@@ -79,7 +79,7 @@ while count<n
     theta_b2= T_b{bp}.theta;
     
     
-    path_ret= collision_detection(S,p,r_robot,p_obstacle,r_obstacle,theta_a2,theta_b2);
+    path_ret= Final_collision_detection(S,p,r_robot,theta_a2,theta_b2);
     if path_ret==0
         b.theta= theta1;
         b.parent=bp;
