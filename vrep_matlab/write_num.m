@@ -32,10 +32,15 @@ if (clientID>-1)
         
         size_t= size(thetas{k}.p1);
         t=zeros(size_t(1),size_t(2),4);
-        t(1:6,:,1)= thetas{k}.p1;
-        t(1:6,:,2)= thetas{k}.p2;
-        t(1:6,:,3)= thetas{k}.p3;
-        t(1:6,:,4)= thetas{k}.p4;
+        v= clock;
+        a1= floor(v(4)/10);
+        a2= mod(floor(v(4),10));
+        a3= floor(v(5)/10);
+        a4= mod(floor(v(4),10));
+        t(1:6,:,1)= thetas{a1}.p1;
+        t(1:6,:,2)= thetas{a2}.p2;
+        t(1:6,:,3)= thetas{a3}.p3;
+        t(1:6,:,4)= thetas{a4}.p4;
         for j=1:4   
             
             theta0= t(:,:,j);
