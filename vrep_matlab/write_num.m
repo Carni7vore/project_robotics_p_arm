@@ -24,17 +24,34 @@ if (clientID>-1)
     [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
     [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
-%     pause(0.5);
+%     pause(0.5)
     t=zeros(1,1,1);
-    for k=9
+    initial=zeros(6,1);
+    
+    for k=8
+        
         size_t= size(thetas{k}.p1);
         t=zeros(size_t(1),size_t(2),4);
         t(1:6,:,1)= thetas{k}.p1;
         t(1:6,:,2)= thetas{k}.p2;
         t(1:6,:,3)= thetas{k}.p3;
         t(1:6,:,4)= thetas{k}.p4;
-        for j=1:4    
+        for j=1:4   
+            
             theta0= t(:,:,j);
+            path=Final_path_planning(initial,theta0(1:6,1));
+            tempi=size(path);
+            for i=1:tempi(2)
+                  res=vrep.simxSetJointTargetPosition(clientID,obj1,path(1,i), vrep.simx_opmode_blocking);   
+                res=vrep.simxSetJointTargetPosition(clientID,obj2,path(2,i), vrep.simx_opmode_blocking);   
+                res=vrep.simxSetJointTargetPosition(clientID,obj3,path(3,i), vrep.simx_opmode_blocking);  
+                res=vrep.simxSetJointTargetPosition(clientID,obj4,path(4,i), vrep.simx_opmode_blocking);
+                res=vrep.simxSetJointTargetPosition(clientID,obj5,path(5,i), vrep.simx_opmode_blocking);
+                res=vrep.simxSetJointTargetPosition(clientID,obj6,path(6,i), vrep.simx_opmode_blocking);
+                pause(1);
+            end
+            
+                
             temp=size(theta0);
             length= temp(2);
             for i=1:length
@@ -46,6 +63,7 @@ if (clientID>-1)
                 res=vrep.simxSetJointTargetPosition(clientID,obj6,theta0(6,i), vrep.simx_opmode_blocking);
                 pause(0.2);
             end
+            initial=theta0(1:6,length);
         end
     end
     vrep.simxAddStatusbarMessage(clientID,'Hello V-REP!',vrep.simx_opmode_oneshot);
