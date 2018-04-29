@@ -8,7 +8,7 @@ vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
 vrep.simxFinish(-1); % just in case, close all opened connections
 clientID=vrep.simxStart('127.0.0.1',19999,true,true,5000,5);
 x1=-0.7;
-y1=-0.335+0.6;
+y1=-0.335+0.07+0.6;
 z1=0.85;
 
 
@@ -22,7 +22,7 @@ if (clientID>-1)
     [res4,obj4]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint4',opMode);
     [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
-    theta0=zeros(6,47);
+    theta0=zeros(6,18);
     
     t=[1 0 0 -0.35;0 1 0 -0.00013;0 0 1 1.2552;0 0 0 1];
     T1=[0 0 -1 (x1+0.1);0 1 0 y1; 1 0 0 z1; 0 0 0 1];
