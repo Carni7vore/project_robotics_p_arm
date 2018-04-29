@@ -1,6 +1,6 @@
 %write num
 disp('Program started');
-load('3.mat');
+load('thetas.mat')
 % vrep=remApi('remoteApi','extApi.h'); % using the header (requires a compiler)
 vrep=remApi('remoteApi'); % using the prototype file (remoteApiProto.m)
 vrep.simxFinish(-1); % just in case, close all opened connections
@@ -25,7 +25,7 @@ if (clientID>-1)
     [res5,obj5]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint5',opMode);
     [res6,obj6]= vrep.simxGetObjectHandle(clientID,'P_Arm_joint6',opMode);
 %     pause(0.5)
-    t=zeros(1,1,1);
+%     t=zeros(1,1,1);
     initial=zeros(6,1);
     
     for k=10
@@ -33,17 +33,30 @@ if (clientID>-1)
         size_t= size(thetas{k}.p1);
         t=zeros(size_t(1),size_t(2),4);
         v= clock;
+        t={};
         a1= floor(v(4)/10);
-        a2= mod(floor(v(4),10));
+        a2= mod(v(4),10);
         a3= floor(v(5)/10);
-        a4= mod(floor(v(4),10));
-        t(1:6,:,1)= thetas{a1}.p1;
-        t(1:6,:,2)= thetas{a2}.p2;
-        t(1:6,:,3)= thetas{a3}.p3;
-        t(1:6,:,4)= thetas{a4}.p4;
+        a4= mod(v(4),10);
+        if (a1==0)
+            a1=10;
+        end
+        if (a2==0)
+            a2=10;
+        end
+        if (a3==0)
+            a3=10;
+        end
+        if (a4==0)
+            a4=10;
+        end
+        t{1}= thetas{a1}.p1;
+        t{2}= thetas{a2}.p2;
+        t{3}= thetas{a3}.p3;
+        t{4}= thetas{a4}.p4;
         for j=1:4   
             
-            theta0= t(:,:,j);
+            theta0= t{j};
             path=Final_path_planning(initial,theta0(1:6,1));
             tempi=size(path);
             for i=1:tempi(2)
