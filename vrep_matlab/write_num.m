@@ -68,7 +68,7 @@ if (clientID>-1)
                 res=vrep.simxSetJointTargetPosition(clientID,obj4,path(4,i), vrep.simx_opmode_blocking);
                 res=vrep.simxSetJointTargetPosition(clientID,obj5,path(5,i), vrep.simx_opmode_blocking);
                 res=vrep.simxSetJointTargetPosition(clientID,obj6,path(6,i), vrep.simx_opmode_blocking);
-                pause(1);
+                pause(0.5);
             end
             
                 
@@ -81,7 +81,7 @@ if (clientID>-1)
                 res=vrep.simxSetJointTargetPosition(clientID,obj4,theta0(4,i), vrep.simx_opmode_blocking);
                 res=vrep.simxSetJointTargetPosition(clientID,obj5,theta0(5,i), vrep.simx_opmode_blocking);
                 res=vrep.simxSetJointTargetPosition(clientID,obj6,theta0(6,i), vrep.simx_opmode_blocking);
-                pause(0.2);
+                
             end
             initial=theta0(1:6,length);
         end

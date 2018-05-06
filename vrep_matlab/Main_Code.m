@@ -7,11 +7,9 @@ work2=norm(str2num(Judge));
 % A=isstrprop(Judge,'digit');
 % B=str(A);
 % C=str2num(B)
-count=1;
 
-if count~=1
-    
-end
+    erase;
+
 
 
     if work1~=0
@@ -22,6 +20,6 @@ end
             calculation_final(str2num(Judge));
     end
     
-    count=count+1;
-    
+   
+    clc
 end

@@ -41,7 +41,7 @@ p(:,8)=[-0.35;-0.00013;1.2552];
 r_robot=0.05;
 while count<n
    
-    disp(count);
+    
     theta1=  2*pi/3*(rand(size_theta,1)*2-ones(size_theta,1));
     flag1=0;
     flag2=0;
